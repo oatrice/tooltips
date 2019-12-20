@@ -65,19 +65,13 @@ public class ToolTipsManager {
         mListener = listener;
     }
 
-    public void reGetHeightAndShow(ToolTip toolTip) {
-        getTooltipHeight();
-    }
-
     public View show(ToolTip toolTip) {
         View tipView = create(toolTip);
-        getTooltipHeight();
         if (tipView == null) {
             return null;
         }
 
         // animate tip visibility
-        reGetHeightAndShow(toolTip);
         mToolTipAnimator.popup(tipView, mAnimationDuration).start();
 
         return tipView;
@@ -140,14 +134,16 @@ public class ToolTipsManager {
 
     }
 
-    public int getTooltipHeight() {
+    public int getTooltipHeight(ToolTip toolTip) {
+        create(toolTip);
         if (tipView != null) {
             return tipView.getMeasuredHeight();
         }
         return 0;
     }
 
-    public int getTooltipWidth() {
+    public int getTooltipWidth(ToolTip toolTip) {
+        create(toolTip);
         if (tipView != null) {
             return tipView.getMeasuredWidth();
         }

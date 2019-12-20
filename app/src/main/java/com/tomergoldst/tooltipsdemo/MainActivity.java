@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements
         builder.setAlign(mAlign);
         builder.setBackgroundColor(Color.DKGRAY);
         builder.setTextAppearance(R.style.TooltipTextAppearance);
-        mToolTipsManager.show(builder.build());
+//        mToolTipsManager.show(builder.build());
     }
 
     @Override
