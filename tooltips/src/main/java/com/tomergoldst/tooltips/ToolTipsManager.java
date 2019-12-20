@@ -49,6 +49,7 @@ public class ToolTipsManager {
     private ToolTipAnimator mToolTipAnimator;
     @Nullable
     private TipListener mListener;
+    private TextView tipView;
 
     public interface TipListener {
         void onTipDismissed(View view, int anchorViewId, boolean byUser);
@@ -95,7 +96,7 @@ public class ToolTipsManager {
         }
 
         // init tip view parameters
-        TextView tipView = createTipView(toolTip);
+        tipView = createTipView(toolTip);
 
         // on RTL languages replace sides
         if (UiUtils.isRtl()) {
@@ -131,6 +132,20 @@ public class ToolTipsManager {
 
         return tipView;
 
+    }
+
+    public int getTooltipHeight() {
+        if (tipView != null) {
+            return tipView.getMeasuredHeight();
+        }
+        return 0;
+    }
+
+    public int getTooltipWidth() {
+        if (tipView != null) {
+            return tipView.getMeasuredWidth();
+        }
+        return 0;
     }
 
     private void moveTipToCorrectPosition(TextView tipView, Point p) {

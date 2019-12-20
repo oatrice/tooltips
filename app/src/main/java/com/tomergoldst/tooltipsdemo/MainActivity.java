@@ -17,6 +17,7 @@ limitations under the License.
 package com.tomergoldst.tooltipsdemo;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -164,6 +165,22 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.button_below:
                 mToolTipsManager.findAndDismiss(mTextView);
+                int tooltipHeight = mToolTipsManager.getTooltipHeight();
+
+                Rect mBelowBtnFrame = new Rect();
+                mAlignCenter.getGlobalVisibleRect(mBelowBtnFrame);
+
+                Rect mTextViewFrame = new Rect();
+                mTextView.getGlobalVisibleRect(mTextViewFrame);
+
+                int framebottom = mBelowBtnFrame.top;
+                int tooltipBottom = mTextViewFrame.bottom;
+
+                int space = framebottom - tooltipBottom;
+                int availableHeightForTooltip = space - tooltipHeight;
+
+                Log.d("onClick", "availableHeightForTooltip: " + availableHeightForTooltip);
+
                 builder = new ToolTip.Builder(this, mTextView, mRootLayout, text, ToolTip.POSITION_BELOW);
                 builder.setAlign(mAlign);
                 builder.setTextAppearance(R.style.TooltipTextAppearance);
